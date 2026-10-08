@@ -1,0 +1,27 @@
+name: 功能建议 / Feature request
+description: 提出新功能或改进建议
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 背景 / 问题
+      description: 这个功能要解决什么业务痛点？
+      placeholder: 作为门店店长，我希望……
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 你设想的解决方式（可选）
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充信息
+      description: 截图、参考链接、其他上下文
+    validations:
+      required: false
