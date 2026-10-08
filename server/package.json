@@ -1,0 +1,24 @@
+{
+  "name": "store-order-server",
+  "version": "5.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "verify": "node scripts/verify-all.mjs"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.18",
+    "archiver": "^7.0.1",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.0.0",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.2.0",
+    "sharp": "^0.35.3",
+    "xlsx": "^0.18.5"
+  }
+}

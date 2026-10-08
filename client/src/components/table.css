@@ -1,0 +1,103 @@
+/* ================================================================
+   共享数据表格样式（去重自 purchases / products / inventory /
+   knowledge / users / delivery / targets 7 个模块）
+   —— 单一可信源：所有"标准"表格统一引用下列类，
+      取消各模块重复粘贴的 *-pc-table / *-row-* / *-action-btn /
+      *-pagination-bar 规则。
+   注：Orders 模块为刻意高端变体（暖色渐变表头 + 36px 按钮），
+       保留各自 orders-* 规则，不在此统一。
+   暗色覆盖集中在本文件末尾，合并了原本散落在各模块 dark 块中的规则。
+   ================================================================ */
+
+/* ----- 表格容器：表头 + 表体基线 ----- */
+.app-data-table .ant-table-thead > tr > th {
+  background: var(--color-bg-white) !important;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border) !important;
+  padding: 11px 12px !important;
+}
+.app-data-table .ant-table-tbody > tr > td {
+  padding: 11px 12px !important;
+  border-bottom: 1px solid var(--color-border-light) !important;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* ----- 斑马纹 ----- */
+.app-row-even { background: var(--color-bg-white); }
+.app-row-odd  { background: var(--color-row-odd); }
+.app-data-table .ant-table-tbody > tr:hover > td,
+.app-row-even:hover > td,
+.app-row-odd:hover > td {
+  background: var(--color-row-hover) !important;
+}
+
+/* ----- 行内操作图标按钮 ----- */
+.app-action-btn {
+  width: 32px !important; height: 32px !important; min-width: 32px !important;
+  padding: 0 !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 6px !important;
+  color: var(--color-text-secondary) !important;
+  background: var(--color-bg-white) !important;
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  transition: all 0.2s var(--ease-standard) !important;
+}
+.app-action-btn:hover {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+/* 危险操作（删除 / 出库）：hover 才变红 */
+.app-action-del:hover {
+  color: var(--color-error) !important;
+  border-color: var(--color-error) !important;
+  background: var(--color-error-bg) !important;
+}
+
+/* ----- 分页栏（卡片式，统一 7 模块） ----- */
+.app-pagination-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; margin-top: 12px;
+  background: var(--color-bg-white); border-radius: 8px;
+}
+.app-pagination-total {
+  color: var(--color-text-tertiary); font-size: var(--font-size-sm); font-weight: 500;
+}
+.app-pagination-total strong { color: var(--color-primary); font-weight: 700; }
+.app-pagination-bar .ant-pagination-item {
+  border-radius: 6px !important;
+  border: 1px solid var(--color-border) !important;
+  min-width: 32px !important; height: 32px !important; line-height: 30px !important;
+}
+.app-pagination-bar .ant-pagination-item-active {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+.app-pagination-bar .ant-pagination-item-active a { color: #fff !important; }
+.app-pagination-bar .ant-pagination-prev,
+.app-pagination-bar .ant-pagination-next {
+  min-width: 32px !important; height: 32px !important; line-height: 30px !important;
+}
+.app-pagination-bar .ant-pagination-prev .ant-pagination-item-link,
+.app-pagination-bar .ant-pagination-next .ant-pagination-item-link {
+  border-radius: 6px !important;
+}
+
+/* ================================================================
+   暗色模式覆盖（合并自 7 个模块散落的 dark 规则）
+   ================================================================ */
+html[data-theme="dark"] .app-row-even { background: rgba(255,255,255,0.02); }
+html[data-theme="dark"] .app-row-odd  { background: transparent; }
+html[data-theme="dark"] .app-data-table .ant-table-thead > tr > th {
+  background: rgba(255,255,255,0.04) !important;
+}
+html[data-theme="dark"] .app-data-table .ant-table-tbody > tr:hover > td,
+html[data-theme="dark"] .app-row-even:hover > td,
+html[data-theme="dark"] .app-row-odd:hover > td {
+  background: var(--color-row-hover) !important;
+}
+html[data-theme="dark"] .app-action-btn {
+  border-color: var(--color-border) !important;
+}

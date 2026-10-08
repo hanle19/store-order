@@ -1,0 +1,137 @@
+/* ============================================================
+   经营分析页 · 设计系统（与工作台 v4 统一）
+   - 卡片 chrome / KPI 行 / 响应式网格 / 入场动效
+   - 全部使用 CSS 变量（var(--token)），深浅色模式天然适配
+   ============================================================ */
+
+.analytics-page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 工具栏：年/月选择 + 月度·年度切换 */
+.analytics-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.analytics-toolbar .analytics-toolbar__spacer {
+  flex: 1;
+}
+
+/* KPI 概览条 */
+.analytics-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.analytics-kpi {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: 16px 18px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.analytics-kpi:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.analytics-kpi__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+.analytics-kpi__value {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 6px;
+  line-height: 1.2;
+}
+.analytics-kpi__value .unit {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  margin-left: 4px;
+  font-weight: 400;
+}
+.analytics-kpi__sub {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
+}
+
+/* 图表网格 */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* 统一图表卡片 chrome */
+.analytics-card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  padding: 16px 18px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  animation: anaFade 0.32s ease both;
+}
+.analytics-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.analytics-card--full {
+  grid-column: 1 / -1;
+}
+.analytics-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+.analytics-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.analytics-card__hint {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+}
+.analytics-card__body {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 加载 / 空态占位 */
+.analytics-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+
+@keyframes anaFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .analytics-kpi-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .analytics-card__hint { display: none; }
+}
+
+/* 无障碍：尊重减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .analytics-card { animation: none; }
+  .analytics-card:hover { transform: none; }
+  .analytics-kpi:hover { transform: none; }
+}

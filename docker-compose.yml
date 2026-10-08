@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  store-app:
+    build: .
+    container_name: wanan-store
+    network_mode: host
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    environment:
+      - PORT=3333
+      - JWT_SECRET=wanan-home-2024-your-custom-secret
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8

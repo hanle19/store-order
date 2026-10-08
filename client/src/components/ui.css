@@ -1,0 +1,248 @@
+/* ================================================================
+   统一交互组件样式（FilterBar / EmptyState / Skeleton / StatCard / CommandPalette）
+   —— 与 index.css 设计令牌同源，双主题安全（依赖 --color-* 变量）
+   ================================================================ */
+
+/* 统一筛选工具条：替代原先 orders/products/purchases/inventory 各不相同的筛选卡 */
+.app-filter-bar {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .app-filter-bar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.40);
+}
+
+/* 控件高度基线：对齐 WS2 前 36px 紧凑感（旧 *-filter-card 规则已失效，此处补回） */
+.app-filter-bar .ant-input,
+.app-filter-bar .ant-input-affix-wrapper,
+.app-filter-bar .ant-select .ant-select-selector,
+.app-filter-bar .ant-btn {
+  height: 36px;
+}
+/* 搜索框撑满剩余空间，下拉保持 w-sm，形成"搜索主导、筛选从属"节奏 */
+.app-filter-bar .filter-search {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* 金额统一等宽数字，避免列对齐抖动 */
+.money {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 业务化空状态 */
+.app-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+}
+.app-empty-state__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  margin-bottom: 14px;
+}
+.app-empty-state__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.app-empty-state__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin-top: 6px;
+  max-width: 320px;
+}
+.app-empty-state__action {
+  margin-top: 16px;
+}
+
+/* 页面骨架屏（路由懒加载占位） */
+.app-page-skeleton {
+  padding: 4px 0;
+}
+.app-page-skeleton__title {
+  margin-bottom: 16px;
+}
+.app-page-skeleton__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.app-page-skeleton__card {
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+}
+
+/* 数据指标卡（工作台英雄页） */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.stat-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.stat-card__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.stat-card__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  /* 背景取图标自身颜色（currentColor）的淡 tint，自动适配任意主色 */
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+.stat-card__title {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+.stat-card__trend {
+  margin-left: auto;
+  font-size: 12px;
+}
+.stat-card__value {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.stat-card__prefix,
+.stat-card__suffix {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+}
+.stat-card__sub {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
+}
+
+/* 快捷入口磁贴 */
+.quick-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.quick-action-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-light);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+.quick-action-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border-light));
+}
+.quick-action-tile__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+.quick-action-tile__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.quick-action-tile__desc {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+/* 全局命令面板（Ctrl/Cmd+K） */
+.cmd-palette__list {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 8px;
+}
+.cmd-palette__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+.cmd-palette__item.is-active {
+  background: var(--color-primary-light);
+}
+.cmd-palette__icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.cmd-palette__label {
+  font-size: 14px;
+  color: var(--color-text);
+  flex: 1;
+}
+.cmd-palette__group {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  background: var(--color-bg);
+  border-radius: 100px;
+  padding: 2px 8px;
+}
+.cmd-palette__empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
